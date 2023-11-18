@@ -185,6 +185,6 @@ def buttons_draw():
 
 #open other file
 def open_py_file():
-    call(["python3", "main.py"])
+    call(["python", "main.py"])
 
 

@@ -10,8 +10,8 @@ BGCOLOUR = ( (DARKGREY[0] + 0) // 2,    # Average the red component
 )
 
 # game settings
-WIDTH = 1200
-HEIGHT = 800
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 800
 FPS = 60
 title = "Sliding Puzzle Game"
 TILESIZE = 128
