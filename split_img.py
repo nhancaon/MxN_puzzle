@@ -49,7 +49,7 @@ def split(start_split):
         # Use the os.path.basename() function to get the filename from the path
         file_name, file_tailname = os.path.splitext(os.path.basename(path))
 
-        piece_width, piece_height = TILESIZE * GAME_SIZE_Y, TILESIZE * GAME_SIZE_X
+        piece_width, piece_height = TILE_SIZE * GAME_SIZE_Y, TILE_SIZE * GAME_SIZE_X
         img = cv2.resize(img, (piece_height, piece_width))
 
         # grid_size = 3
@@ -71,7 +71,7 @@ def split(start_split):
                     subimg = np.flip(grid[c], axis =- 1)
                     subimg_rgb = cv2.cvtColor(subimg, cv2.COLOR_BGR2RGB)
                     if c == rows * cols - 1:
-                        subimg_rgb = cv2.medianBlur(subimg_rgb,5)
+                        subimg_rgb = cv2.medianBlur(subimg_rgb, 9)
                     filename = os.path.join(output_dir, f"{file_name}{c}{file_tailname}")
                     cv2.imwrite(filename, subimg_rgb)
                     c += 1

@@ -348,10 +348,10 @@ class Game:
         self.all_sprites.update()
 
     def draw_grid(self):
-        for row in range(-1, GAME_SIZE_X * TILESIZE, TILESIZE):
-            pygame.draw.line(self.screen, LIGHTGREY, (row, 0), (row, GAME_SIZE_Y * TILESIZE), 3)
-        for col in range(-1, GAME_SIZE_Y * TILESIZE, TILESIZE):
-            pygame.draw.line(self.screen, LIGHTGREY, (0, col), (GAME_SIZE_X * TILESIZE, col), 3)
+        for row in range(-1, GAME_SIZE_X * TILE_SIZE, TILE_SIZE):
+            pygame.draw.line(self.screen, LIGHTGREY, (row, 0), (row, GAME_SIZE_Y * TILE_SIZE), 3)
+        for col in range(-1, GAME_SIZE_Y * TILE_SIZE, TILE_SIZE):
+            pygame.draw.line(self.screen, LIGHTGREY, (0, col), (GAME_SIZE_X * TILE_SIZE, col), 3)
 
     def draw(self):
         #set background
@@ -531,7 +531,7 @@ class Game:
                 if self.start_add_image:  
                     #Display the original image
                     new_image = pygame.image.load(origin_path())
-                    my_picture = Picture(0, SCREEN_HEIGHT - TILESIZE * 3, TILESIZE * 9, TILESIZE * 9, new_image)
+                    my_picture = Picture(0, SCREEN_HEIGHT - TILE_SIZE * 3, TILE_SIZE * 9, TILE_SIZE * 9, new_image)
                     my_picture.resize()                               
                     self.picture_list.append(my_picture)
 

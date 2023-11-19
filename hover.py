@@ -4,7 +4,9 @@ from subprocess import call
 buttons = []
 multi = []
 multi_press = 0
-# multi_check = False
+
+rec = False
+square = False
 
 class Button:
     def __init__(self, text, width, height, pos, elevation):
@@ -56,10 +58,24 @@ class Button:
                 self.dynamic_elevation = self.elevation
                 if self.pressed == True:
                     print('click')
+                    if self.text == "M x N":
+                        pygame.quit()
+                        #open map_creation.py and close login interface
+                        open_py_file("MxNinput.py")
+                        sys.exit()
+                    if self.text == "Start Game":
+                        pygame.quit()                        
+                        open_py_file("main.py")
+                        sys.exit()                     
+                    if self.text == "N x N":
+                        pygame.quit()
+                        #open map_creation.py and close login interface
+                        open_py_file("NxNinput.py")
+                        sys.exit()
                     if self.text == "Play":
                         pygame.quit()
-                        #open main.py and close login interface
-                        open_py_file()
+                        #open map_creation.py and close login interface
+                        open_py_file("map_option.py")
                         sys.exit()
                     if self.text == "Guide":
                         self.pressed = False
@@ -133,10 +149,8 @@ class MultiOptionButton(Button):
         if self.top_rect.collidepoint(mouse_pos):
             self.top_color = '#D74B4B'
             if pygame.mouse.get_pressed()[0]:
-                # global multi_check
                 self.dynamic_elevation = 0
                 self.pressed = True
-                # multi_check = True
                 for i in range(len(self.translations)):
                     if self.num_press == i:
                         self.change_text(f"{self.translations[i]}")
@@ -153,7 +167,6 @@ class MultiOptionButton(Button):
                         if self.num_press > (len(self.translations) - 1):
                             self.change_text(self.text)
                             self.num_press = -1
-                    # multi_check = False
                     self.pressed = False
                     
         else:
@@ -170,11 +183,12 @@ def get_clicked_button_text():
 def get_clicked_button_text_multi():
     return multi_press
 
+
 pygame.init()
 screen = pygame.display.set_mode((1000,500))
 pygame.display.set_caption('Login interface')
 clock = pygame.time.Clock()
-gui_font = pygame.font.Font(None,30)
+gui_font = pygame.font.SysFont("Consolas", 30)
 
 #draw buttons
 def buttons_draw():
@@ -184,7 +198,7 @@ def buttons_draw():
         mul.draw()
 
 #open other file
-def open_py_file():
-    call(["python", "main.py"])
+def open_py_file(file_name):
+    call(["python", f"{file_name}"])
 
 
