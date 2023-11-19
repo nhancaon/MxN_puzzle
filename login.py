@@ -7,7 +7,6 @@ pygame.init()
 
 clock = pygame.time.Clock()
 FPS = 60
-
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
@@ -24,8 +23,8 @@ scroll = 0
 tiles = math.ceil(SCREEN_WIDTH  / bg_width) + 1
 
 button1 = Button('Play',200,40,(SCREEN_WIDTH / 2 - 100,200),5)
-button2 = Button('Guide',200,40,(SCREEN_WIDTH / 2 - 100,250),5)
-button3 = Button('Exit',200,40,(SCREEN_WIDTH / 2 - 100,300),5)
+button2 = Button('Guide',200,40,(SCREEN_WIDTH / 2 - 100,270),5)
+button3 = Button('Exit',200,40,(SCREEN_WIDTH / 2 - 100,340),5)
 
 #center screen
 os.environ['SDL_VIDEO_CENTERED'] = '1'

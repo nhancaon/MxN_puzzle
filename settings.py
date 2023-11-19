@@ -1,19 +1,18 @@
-import pygame
-# COLORS (r, g, b)
+# Set color based on RGB
 BLACK = (0,0,0)
 WHITE = (255,255,255)
-DARKGREY = (165, 253, 86)
-LIGHTGREY =  (255,255,255)
-BGCOLOUR = ( (DARKGREY[0] + 0) // 2,    # Average the red component
-    (DARKGREY[1] + 0) // 2,    # Average the green component
-    (DARKGREY[2] + 128) // 2  # Average the blue component with dark blue
+DARK_GREY = (165, 253, 86)
+LIGHTGREY = (255,255,255)
+BG_COLOR = ((DARK_GREY[0] + 0) // 2,    # Average the red component
+            (DARK_GREY[1] + 0) // 2,    # Average the green component
+            (DARK_GREY[2] + 128) // 2  # Average the blue component with dark blue
 )
 
-# game settings
-WIDTH = 1200
-HEIGHT = 800
+# Game Settings
+title = "MxN Puzzle Game"
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 800
 FPS = 60
-title = "Sliding Puzzle Game"
-TILESIZE = 128
+TILE_SIZE = 128
+GAME_SIZE_Y = 3
 GAME_SIZE_X = 3
-GAME_SIZE_Y = 2

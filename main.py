@@ -3,6 +3,7 @@ import random
 import time
 import os
 import copy
+import shutil
 
 from sprite import *
 from settings import *
@@ -20,7 +21,7 @@ os.environ['SDL_VIDEO_CENTERED'] = '1'
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption(title)
         self.clock = pygame.time.Clock()
         self.step = ""
@@ -232,9 +233,9 @@ class Game:
                 self.steps_hill = 0
                 self.moves = []
                 self.draw()
+
         if self.start_DFS:
             solution_path = self.DFS()
-
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -248,6 +249,7 @@ class Game:
                 self.start_DFS = False
                 self.start_game = True
                 self.start_timer = True
+
         if self.start_BFS == True:
             solution_path = self.BFS()
             if solution_path:
@@ -263,9 +265,9 @@ class Game:
                 self.start_BFS = False
                 self.start_game = True
                 self.start_timer = True
+
         if self.start_UCS:
             solution_path = self.UCS()
-
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -279,9 +281,9 @@ class Game:
                 self.start_UCS = False
                 self.start_game = True
                 self.start_timer = True
+
         if self.start_A_STAR:
             solution_path = self.A_STAR()
-
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -295,8 +297,8 @@ class Game:
                 self.start_A_STAR = False
                 self.start_game = True
                 self.start_timer = True
-        if self.start_GREEDY:
-            
+
+        if self.start_GREEDY:       
             solution_path = self.GREEDY()
             if solution_path:
                 self.moves=[]
@@ -311,9 +313,9 @@ class Game:
                 self.start_GREEDY = False
                 self.start_game = True
                 self.start_timer = True
+
         if self.start_HILL:
-            solution_path = self.HILL()
-            
+            solution_path = self.HILL()          
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -327,9 +329,9 @@ class Game:
                 self.start_HILL = False
                 self.start_game = True
                 self.start_timer = True
+
         if self.start_IDS:
             solution_path = self.IDS()
-
             if solution_path:
                 self.moves=copy.deepcopy(solution_path)
                 for move in solution_path:
@@ -341,16 +343,15 @@ class Game:
                 print("No solution found")
                 self.start_IDS = False
                 self.start_game = True
-                self.start_timer = True            
+                self.start_timer = True    
+
         self.all_sprites.update()
 
     def draw_grid(self):
-        for row in range(-1, GAME_SIZE_X * TILESIZE, TILESIZE):
-            pygame.draw.line(self.screen, LIGHTGREY, (row, 0),
-                             (row, GAME_SIZE_Y * TILESIZE))
-        for col in range(-1, GAME_SIZE_Y * TILESIZE, TILESIZE):
-            pygame.draw.line(self.screen, LIGHTGREY, (0, col),
-                             (GAME_SIZE_X * TILESIZE, col))
+        for row in range(-1, GAME_SIZE_X * TILE_SIZE, TILE_SIZE):
+            pygame.draw.line(self.screen, LIGHTGREY, (row, 0), (row, GAME_SIZE_Y * TILE_SIZE), 3)
+        for col in range(-1, GAME_SIZE_Y * TILE_SIZE, TILE_SIZE):
+            pygame.draw.line(self.screen, LIGHTGREY, (0, col), (GAME_SIZE_X * TILE_SIZE, col), 3)
 
     def draw(self):
         #set background
@@ -396,7 +397,6 @@ class Game:
                   (self.steps_hill)).draw(self.screen)
         UIE(50, 450, self.moves).draw(self.screen)
         pygame.display.flip()
-    
 
     def draw_tiles(self):
         self.tiles = []
@@ -451,9 +451,15 @@ class Game:
         pygame.time.delay(150)
 
     def return_picture_list(self):
+        # Get the current working directory
+        current_directory = os.getcwd()
+        current_directory = current_directory.replace("\\", '/')
+
         # Use a list comprehension to filter files with .png extension
-        directory_path = "D:/UNIVERSITY/3rd/Semester 1/Artificial Intelligence/FINAL PROJECT/8-Puzzle/output_images/"
-        picture_list_save = [f"output_images/{file}" for file in os.listdir(directory_path) if file.endswith(f".jpg")]
+        directory_path = current_directory + "/output_images/"
+        valid_extensions = (".png", ".jpg", ".jpeg", ".bmp", ".gif")
+        picture_list_save = [f"output_images/{file}" for file in os.listdir(directory_path) 
+                             if any(file.lower().endswith(ext) for ext in valid_extensions)]
         return picture_list_save
 
     def events(self):
@@ -493,6 +499,8 @@ class Game:
             self.start_shuffle = True
 
         if clicked_button_text == "New Game":
+            # Delete images in folder output_images
+            delete_files_in_directory(output_images_path)
             self.new()
             self.searched_state_bfs = [0]
             self.searched_state_dfs = [0]
@@ -515,11 +523,18 @@ class Game:
             self.draw_tiles()
 
         if clicked_button_text == "Add image":
+            delete_files_in_directory(output_images_path)
             if icheck == 0:
                 icheck = 1
                 self.start_add_image = True
-                selected_image_path = split(self.start_add_image)
+                split(self.start_add_image)
                 if self.start_add_image:  
+                    #Display the original image
+                    new_image = pygame.image.load(origin_path())
+                    my_picture = Picture(0, SCREEN_HEIGHT - TILE_SIZE * 3, TILE_SIZE * 9, TILE_SIZE * 9, new_image)
+                    my_picture.resize()                               
+                    self.picture_list.append(my_picture)
+
                     # Convert pictures to surfaces
                     image_surfaces = self.return_picture_list()
                     self.pieces = [pygame.image.load(image_path).convert_alpha() for image_path in image_surfaces]
@@ -533,6 +548,7 @@ class Game:
             # Delete images in folder output_images
             delete_files_in_directory(output_images_path)
             self.draw_tiles()
+
         if clicked_button_text == "SOLVE":
             self.initial_state = copy.deepcopy(self.tiles_grid)
             if multi == "BFS":
@@ -571,20 +587,24 @@ class Game:
             self.draw()
     
 def delete_files_in_directory(directory):
-    # Get the list of files in the directory
-    file_list = os.listdir(directory)
-
-    # Iterate over the files and delete each one
-    for file_name in file_list:
-        file_path = os.path.join(directory, file_name)
-        try:
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-                print(f"Deleted: {file_path}")
-            else:
-                print(f"Not a file: {file_path}")
-        except Exception as e:
-            print(f"Error deleting {file_path}: {e}")
+    try:
+        # Get the list of files in the directory
+        file_list = os.listdir(directory)
+        # Iterate over the files and delete each one
+        for file_name in file_list:
+            file_path = os.path.join(directory, file_name)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+                    print(f"Deleted: {file_path}")
+                else:
+                    print(f"Not a file: {file_path}")
+            except Exception as e:
+                print(f"Error deleting {file_path}: {e}")
+        #delete folder includes image has Vietnamese name
+        shutil.rmtree('NonEnglish_images/')
+    except FileNotFoundError as e:
+        print(f"Error accessing directory {directory}: {e}")
 
 
 game = Game()
@@ -592,4 +612,3 @@ game = Game()
 while True:
     game.new()
     game.run()
-    delete_files_in_directory(output_images_path)

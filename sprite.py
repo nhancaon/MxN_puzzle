@@ -8,7 +8,7 @@ class Tile(pygame.sprite.Sprite):
         self.groups = game.all_sprites
         pygame.sprite.Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pygame.Surface((TILESIZE, TILESIZE))
+        self.image = pygame.Surface((TILE_SIZE, TILE_SIZE))
         self.x, self.y = x, y
         self.text = text
         self.rect = self.image.get_rect()
@@ -18,45 +18,44 @@ class Tile(pygame.sprite.Sprite):
                 font_surface = self.font.render(self.text, True, WHITE)
                 self.image.fill(BLACK)
                 self.font_size = self.font.size(self.text)
-                draw_x = (TILESIZE / 2) - self.font_size[0] / 2
-                draw_y = (TILESIZE / 2) - self.font_size[1] / 2
+                draw_x = (TILE_SIZE / 2) - self.font_size[0] / 2
+                draw_y = (TILE_SIZE / 2) - self.font_size[1] / 2
                 self.image.blit(font_surface, (draw_x, draw_y))
-
             else:
-                self.image.fill(BGCOLOUR)
+                self.image.fill(BG_COLOR)
         else:
             if self.text == None:
                 self.image = image
-            elif self.text != "empty":
+            elif self.text == "empty":
                 self.font = pygame.font.SysFont("Consolas", 50)
                 font_surface = self.font.render(self.text, True, WHITE)
 
                 self.font_size = self.font.size(self.text)
-                draw_x = (TILESIZE / 2) - self.font_size[0] / 2
-                draw_y = (TILESIZE / 2) - self.font_size[1] / 2
+                draw_x = (TILE_SIZE / 2) - self.font_size[0] / 2
+                draw_y = (TILE_SIZE / 2) - self.font_size[1] / 2
                 self.image.blit(font_surface, (draw_x, draw_y))
                 self.image = image
-            else:
-                self.image.fill(BGCOLOUR)
+            # else:
+            #     self.image.fill(BG_COLOR)
 
     def update(self):
-        self.rect.x = self.x * TILESIZE
-        self.rect.y = self.y * TILESIZE
+        self.rect.x = self.x * TILE_SIZE
+        self.rect.y = self.y * TILE_SIZE
 
     def click(self, mouse_x, mouse_y):
         return self.rect.left <= mouse_x <= self.rect.right and self.rect.top <= mouse_y <= self.rect.bottom
 
     def right(self):
-        return self.rect.x + TILESIZE < GAME_SIZE_X * TILESIZE
+        return self.rect.x + TILE_SIZE < GAME_SIZE_X * TILE_SIZE
 
     def left(self):
-        return self.rect.x - TILESIZE >= 0
+        return self.rect.x - TILE_SIZE >= 0
 
     def up(self):
-        return self.rect.y - TILESIZE >= 0
+        return self.rect.y - TILE_SIZE >= 0
 
     def down(self):
-        return self.rect.y + TILESIZE < GAME_SIZE_Y * TILESIZE
+        return self.rect.y + TILE_SIZE < GAME_SIZE_Y * TILE_SIZE
 
 class UIElement:
     def __init__(self, x, y, text):
