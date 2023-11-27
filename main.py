@@ -179,16 +179,16 @@ class Game:
         self.initial_state = copy.deepcopy(self.goal_state)
 
         #region Button creation
-        button4 = Button("Clear image",200,50,(700,25),5)
-        button5 = Button("Add image",200,50,(700,100),5)
-        button6 = Button("Reset",200,50,(700,170),5)
-        button7 = Button("Shuffle",200,50,(950,25),5)
-        button8 = Button("SOLVE",100,50,(1000,100),5)
-        button9 = Button("Quit Game",200,50,(950,240),5)
-        button10 = Button("New Game",200,50,(700,240),5)
-
+        button4 = Button("Clear image",200,50,(1100,370),5)
+        button5 = Button("Add image",200,50,(1100,470),5)
+        button6 = Button("Reset",200,50,(1100,110),5)
+        button7 = Button("Shuffle",200,50,(1100,25),5)
+        button8 = Button("SOLVE",100,50,(1150,280),5)
+        button9 = Button("Quit Game",200,50,(1100,650),5)
+        button10 = Button("New Game",200,50,(1100,560),5)
+        
         name_button = ["BFS", "DFS", "IDS", "UCS", "A_STAR", "GREEDY","HILL CLIMBING"]
-        multi_btn = MultiOptionButton(name_button, "Algorithm", 200, 50, (950, 170), 5)
+        multi_btn = MultiOptionButton(name_button, "Algorithm", 200, 50, (1100, 190), 5)
         #endregion
 
         self.draw_tiles()
@@ -365,37 +365,37 @@ class Game:
         self.draw_grid()
         for pic in self.picture_list:
             pic.draw(self.screen)
-        UIElement(550, 35, "%.3f" % self.elapsed_time).draw(self.screen)
-        UIElement(430, 300, "High Score - %.3f" % (self.high_score if self.high_score > 0 else 0)).draw(self.screen)
-        UIElement(430, 350, "BFS Searched : %.0f" %
+        UIElement(900, 650, "%.3f" % self.elapsed_time).draw(self.screen)
+        UIElement(700, 585, "High Score - %.3f" % (self.high_score if self.high_score > 0 else 0)).draw(self.screen)
+        UIElement(700, 25, "BFS Searched : %.0f" %
                   (self.searched_state_bfs[0])).draw(self.screen)
-        UIElement(800, 350, "Steps : %.0f" %
+        UIElement(825, 65, "Steps : %.0f" %
                   (self.steps_bfs)).draw(self.screen)
-        UIElement(430, 400, "DFS Searched : %.0f" %
+        UIElement(700, 105, "DFS Searched : %.0f" %
                   (self.searched_state_dfs[0])).draw(self.screen)
-        UIElement(800, 400, "Steps : %.0f" %
+        UIElement(825, 145, "Steps : %.0f" %
                   (self.steps_dfs)).draw(self.screen)
-        UIElement(430, 450, "IDS Searched : %.0f" %
+        UIElement(700, 185, "IDS Searched : %.0f" %
                   (self.searched_state_ids[0])).draw(self.screen)
-        UIElement(800, 450, "Steps : %.0f" %
+        UIElement(825, 225, "Steps : %.0f" %
                   (self.steps_ids)).draw(self.screen)
-        UIElement(430, 500, "UCS Searched : %.0f" %
+        UIElement(700, 265, "UCS Searched : %.0f" %
                   (self.searched_state_ucs[0])).draw(self.screen)
-        UIElement(800, 500, "Steps : %.0f" %
+        UIElement(825, 305, "Steps : %.0f" %
                   (self.steps_ucs)).draw(self.screen)
-        UIElement(430, 550, "GREEDY Searched : %.0f" %
+        UIElement(645, 345, "GREEDY Searched : %.0f" %
                   (self.searched_state_greedy[0])).draw(self.screen)
-        UIElement(800, 550, "Steps : %.0f" %
+        UIElement(825, 385, "Steps : %.0f" %
                   (self.steps_greedy)).draw(self.screen)
-        UIElement(430, 600, "A* Searched : %.0f" %
+        UIElement(716, 425, "A* Searched : %.0f" %
                   (self.searched_state_astar[0])).draw(self.screen)
-        UIElement(800, 600, "Steps : %.0f" %
+        UIElement(825, 465, "Steps : %.0f" %
                   (self.steps_astar)).draw(self.screen)
-        UIElement(430, 650, "Hill climbing Searched : %.0f" %
+        UIElement(520, 505, "Hill climbing Searched : %.0f" %
                   (self.searched_state_hill[0])).draw(self.screen)
-        UIElement(950, 650, "Steps : %.0f" %
+        UIElement(825, 545, "Steps : %.0f" %
                   (self.steps_hill)).draw(self.screen)
-        UIE(50, 450, self.moves).draw(self.screen)
+        UIE(50, 650, self.moves).draw(self.screen)
         pygame.display.flip()
 
     def draw_tiles(self):

@@ -206,10 +206,10 @@ def hill_climbing(initial_state, goal_state, searched_state_hill):
                 searched_state_hill[0] += 1
                 if tuple(map(tuple, next_state)) not in explored:
                     if tuple(map(tuple, next_state)) not in path_explored:
-                        new_cnt_misplaced = manhattan_distance(next_state)
-                        if new_cnt_misplaced < best_cnt_misplaced:
+                        new_cnt_score = manhattan_distance(next_state)
+                        if new_cnt_score < best_cnt_misplaced:
                             best_state = next_state
-                            best_cnt_misplaced = new_cnt_misplaced
+                            best_cnt_misplaced = new_cnt_score
                             best_move = move_direction
             if best_cnt_misplaced < current_cnt_misplaced:
                 current_cnt_misplaced = best_cnt_misplaced

@@ -68,19 +68,34 @@ class UIElement:
         screen.blit(text, (self.x, self.y))
         
 class UIE:
-    def __init__(self, x, y, text_list):
+    def __init__(self, x, y, text_list, max_chars=25):
         self.x, self.y = x, y
-        self.text_list = text_list
+        self.text_list = self.format_text(text_list, max_chars)
+
+    def format_text(self,text_list, max_chars):
+        formatted_text = []
+        current_line = ""
+        for char in text_list:
+            if len(current_line + char) <= max_chars:
+                current_line += char
+            else:
+                formatted_text.append(current_line)
+                current_line = char
+        formatted_text.append(current_line)
+
+        return formatted_text
+
 
     def draw(self, screen):
+        pygame.init()
         font = pygame.font.SysFont("Consolas", 30)
-        x_offset = 0  # Initialize x_offset to control horizontal position
+        y_offset = 0  
 
         for text in self.text_list:
-            text_surface = font.render(text, True, WHITE)
-            text_rect = text_surface.get_rect(topleft=(self.x + x_offset, self.y))
+            text_surface = font.render(text, True, (255, 255, 255))  # White color for text
+            text_rect = text_surface.get_rect(topleft=(self.x, self.y + y_offset))
             screen.blit(text_surface, text_rect)
-            x_offset += text_rect.width  # Move the next text by the width of the current text
+            y_offset += text_rect.height
 
 class Picture:
     def __init__(self, x, y, width, height, image):
