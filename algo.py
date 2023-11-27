@@ -199,7 +199,7 @@ def hill_climbing(initial_state, goal_state, searched_state_hill):
             successors = generate_successors(current_state)
 
             best_state = None
-            best_cnt_misplaced = float('inf')
+            best_cnt_score = float('inf')
             best_move = None
             
             for next_state, move_direction in successors:
@@ -207,12 +207,12 @@ def hill_climbing(initial_state, goal_state, searched_state_hill):
                 if tuple(map(tuple, next_state)) not in explored:
                     if tuple(map(tuple, next_state)) not in path_explored:
                         new_cnt_score = manhattan_distance(next_state)
-                        if new_cnt_score < best_cnt_misplaced:
+                        if new_cnt_score < best_cnt_score:
                             best_state = next_state
-                            best_cnt_misplaced = new_cnt_score
+                            best_cnt_score = new_cnt_score
                             best_move = move_direction
-            if best_cnt_misplaced < current_cnt_misplaced:
-                current_cnt_misplaced = best_cnt_misplaced
+            if best_cnt_score < current_cnt_misplaced:
+                current_cnt_misplaced = best_cnt_score
             if best_state is not None:
                 stack.append((best_state, path + [best_move]))
                 cnt = cnt+1
