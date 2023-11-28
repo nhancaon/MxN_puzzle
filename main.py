@@ -349,9 +349,9 @@ class Game:
 
     def draw_grid(self):
         for row in range(-1, GAME_SIZE_X * TILE_SIZE, TILE_SIZE):
-            pygame.draw.line(self.screen, LIGHTGREY, (row, 0), (row, GAME_SIZE_Y * TILE_SIZE), 3)
+            pygame.draw.line(self.screen, LIGHTGREY, (row, 0), (row, GAME_SIZE_Y * TILE_SIZE), 7)
         for col in range(-1, GAME_SIZE_Y * TILE_SIZE, TILE_SIZE):
-            pygame.draw.line(self.screen, LIGHTGREY, (0, col), (GAME_SIZE_X * TILE_SIZE, col), 3)
+            pygame.draw.line(self.screen, LIGHTGREY, (0, col), (GAME_SIZE_X * TILE_SIZE, col), 7)
 
     def draw(self):
         #set background

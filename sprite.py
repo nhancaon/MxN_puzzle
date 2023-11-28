@@ -68,7 +68,7 @@ class UIElement:
         screen.blit(text, (self.x, self.y))
         
 class UIE:
-    def __init__(self, x, y, text_list, max_chars=25):
+    def __init__(self, x, y, text_list, max_chars=35):
         self.x, self.y = x, y
         self.text_list = self.format_text(text_list, max_chars)
 
