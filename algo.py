@@ -179,43 +179,36 @@ def a_star(initial_state, goal_state,searched_state_astar):
 
 def hill_climbing(initial_state, goal_state, searched_state_hill):
     path_explored = set()
-    
     while 1==1:
         stack = [(initial_state, [])]
+        current_score = float('inf')
         explored = set()
-        current_cnt_misplaced = float('inf')
-        cnt = 0
         while 1==1 :
+            check = 0
             current_state, path = stack.pop()
 
             if current_state == goal_state:
                 return path
 
+            current_score = manhattan_distance(current_state)
+            isChange=copy.deepcopy(current_score)
             explored.add(tuple(map(tuple, current_state)))
-            
-            if cnt==1 and len(explored) == 0:
-                return None
-            
             successors = generate_successors(current_state)
-
-            best_state = None
-            best_cnt_score = float('inf')
-            best_move = None
             
             for next_state, move_direction in successors:
-                searched_state_hill[0] += 1
                 if tuple(map(tuple, next_state)) not in explored:
                     if tuple(map(tuple, next_state)) not in path_explored:
+                        searched_state_hill[0] += 1
+                        check = 1
                         new_cnt_score = manhattan_distance(next_state)
-                        if new_cnt_score < best_cnt_score:
-                            best_state = next_state
-                            best_cnt_score = new_cnt_score
-                            best_move = move_direction
-            if best_cnt_score < current_cnt_misplaced:
-                current_cnt_misplaced = best_cnt_score
-            if best_state is not None:
-                stack.append((best_state, path + [best_move]))
-                cnt = cnt+1
-            else :
-                break
+                        if new_cnt_score < current_score:
+                            current_score = copy.deepcopy(new_cnt_score)
+                            stack.append((next_state, path + [move_direction]))
+                        else:
+                            path_explored.add(tuple(map(tuple, next_state)))
+            if check == 0 and len(explored) == 1:
+                return None           
+            if isChange == current_score:
+                path_explored.add(tuple(map(tuple, current_state)))
+                break      
     return None
