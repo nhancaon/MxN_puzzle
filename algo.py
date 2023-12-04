@@ -57,8 +57,8 @@ def bfs(initial_state, goal_state,searched_state_bfs):
         successors = generate_successors(current_state)
 
         for next_state, move_direction in successors:
-            searched_state_bfs[0] += 1
             if tuple(map(tuple, next_state)) not in explored:
+                searched_state_bfs[0] += 1
                 queue.append((next_state, path + [move_direction]))
 
     return None  # No solution found
@@ -80,8 +80,8 @@ def ucs(initial_state, goal_state, searched_state_ucs):
         successors = generate_successors(current_state)
 
         for next_state, move_direction in successors:
-            searched_state_ucs[0] += 1
             if tuple(map(tuple, next_state)) not in explored:
+                searched_state_ucs[0] += 1
                 priority = len(path)
                 open_set.put(
                     (priority, next_state, path + [move_direction]))
@@ -103,8 +103,8 @@ def dfs(initial_state, goal_state, searched_state_dfs):
         successors = generate_successors(current_state)
 
         for next_state, move_direction in successors:
-            searched_state_dfs[0] += 1
             if tuple(map(tuple, next_state)) not in explored:
+                searched_state_dfs[0] += 1
                 stack.append((next_state, path + [move_direction]))
 
     return None
@@ -127,8 +127,8 @@ def ids(initial_state, goal_state, searched_state_ids,max_depth=50):
         successors = generate_successors(current_state)
 
         for next_state, move_direction in successors:
-            searched_state_ids[0] += 1
             if tuple(map(tuple, next_state)) not in explored:
+                searched_state_ids[0] += 1
                 stack.append((next_state, path + [move_direction]))
 
     return None
@@ -149,8 +149,8 @@ def greedy(initial_state, goal_state, searched_state_greedy):
         successors = generate_successors(current_state)
 
         for next_state, move_direction in successors:
-            searched_state_greedy[0] += 1
             if tuple(map(tuple, next_state)) not in explored:
+                searched_state_greedy[0] += 1
                 priority = manhattan_distance(next_state)
                 open_set.put(
                     (priority, next_state, path + [move_direction]))
@@ -170,8 +170,8 @@ def a_star(initial_state, goal_state,searched_state_astar):
         successors = generate_successors(current_state)
 
         for next_state, move_direction in successors:
-            searched_state_astar[0] += 1
             if tuple(map(tuple, next_state)) not in explored:
+                searched_state_astar[0] += 1
                 priority = len(path) + manhattan_distance(next_state)
                 open_set.put((priority, next_state, path + [move_direction]))
 

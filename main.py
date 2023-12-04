@@ -586,24 +586,31 @@ class Game:
         if clicked_button_text == "SOLVE":
             self.initial_state = copy.deepcopy(self.tiles_grid)
             if multi == "BFS":
+                self.searched_state_bfs = [0]
                 self.shuffle_time = 0
                 self.start_BFS = True 
             elif multi == "DFS":
+                self.searched_state_dfs = [0]
                 self.shuffle_time = 0
                 self.start_DFS = True
             elif multi == "IDS":
+                self.searched_state_ids = [0]
                 self.shuffle_time = 0
                 self.start_IDS = True
             elif multi == "UCS":
+                self.searched_state_ucs = [0]
                 self.shuffle_time = 0
                 self.start_UCS = True
             elif multi == "A_STAR":
+                self.searched_state_astar = [0]
                 self.shuffle_time = 0
                 self.start_A_STAR = True
             elif multi == "GREEDY":
+                self.searched_state_greedy = [0]
                 self.shuffle_time = 0
                 self.start_GREEDY = True
             elif multi == "HILL CLIMBING":
+                self.searched_state_hill = [0]
                 self.shuffle_time = 0
                 self.start_HILL = True
 
