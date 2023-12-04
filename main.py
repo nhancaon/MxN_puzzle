@@ -59,6 +59,20 @@ class Game:
         self.steps_greedy = 0
         self.steps_hill = 0
         self.moves = []
+        self.bfs_time = 0
+        self.bfs_elapsed_time = 0
+        self.dfs_time = 0
+        self.dfs_elapsed_time = 0
+        self.ids_time = 0
+        self.ids_elapsed_time = 0
+        self.ucs_time = 0
+        self.ucs_elapsed_time = 0
+        self.gd_time = 0
+        self.gd_elapsed_time = 0
+        self.a_time = 0
+        self.a_elapsed_time = 0
+        self.h_time = 0
+        self.h_elapsed_time = 0
 
     def get_high_scores(self):
         with open("high_score.txt", "r") as file:
@@ -235,7 +249,9 @@ class Game:
                 self.draw()
 
         if self.start_DFS:
+            self.dfs_time = time.time()
             solution_path = self.DFS()
+            self.dfs_elapsed_time = time.time() - self.dfs_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -251,7 +267,9 @@ class Game:
                 self.start_timer = True
 
         if self.start_BFS == True:
+            self.bfs_time = time.time()
             solution_path = self.BFS()
+            self.bfs_elapsed_time = time.time() - self.bfs_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -267,7 +285,9 @@ class Game:
                 self.start_timer = True
 
         if self.start_UCS:
+            self.ucs_time = time.time()
             solution_path = self.UCS()
+            self.ucs_elapsed_time = time.time() - self.ucs_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -283,7 +303,9 @@ class Game:
                 self.start_timer = True
 
         if self.start_A_STAR:
+            self.a_time = time.time()
             solution_path = self.A_STAR()
+            self.a_elapsed_time = time.time() - self.a_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -299,7 +321,9 @@ class Game:
                 self.start_timer = True
 
         if self.start_GREEDY:       
+            self.gd_time = time.time()
             solution_path = self.GREEDY()
+            self.gd_elapsed_time = time.time() - self.gd_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -315,7 +339,9 @@ class Game:
                 self.start_timer = True
 
         if self.start_HILL:
-            solution_path = self.HILL()          
+            self.h_time = time.time()
+            solution_path = self.HILL()
+            self.h_elapsed_time = time.time() - self.h_time       
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -331,7 +357,9 @@ class Game:
                 self.start_timer = True
 
         if self.start_IDS:
+            self.ids_time = time.time()
             solution_path = self.IDS()
+            self.ids_elapsed_time = time.time() - self.ids_time   
             if solution_path:
                 self.moves=copy.deepcopy(solution_path)
                 for move in solution_path:
@@ -344,7 +372,6 @@ class Game:
                 self.start_IDS = False
                 self.start_game = True
                 self.start_timer = True    
-
         self.all_sprites.update()
 
     def draw_grid(self):
@@ -371,30 +398,37 @@ class Game:
                   (self.searched_state_bfs[0])).draw(self.screen)
         UIElement(825, 65, "Steps : %.0f" %
                   (self.steps_bfs)).draw(self.screen)
+        UIElement(1000, 45, "%.3f" % self.bfs_elapsed_time).draw(self.screen)
         UIElement(700, 105, "DFS Searched : %.0f" %
                   (self.searched_state_dfs[0])).draw(self.screen)
         UIElement(825, 145, "Steps : %.0f" %
                   (self.steps_dfs)).draw(self.screen)
+        UIElement(1000, 125, "%.3f" % self.dfs_elapsed_time).draw(self.screen)
         UIElement(700, 185, "IDS Searched : %.0f" %
                   (self.searched_state_ids[0])).draw(self.screen)
         UIElement(825, 225, "Steps : %.0f" %
                   (self.steps_ids)).draw(self.screen)
+        UIElement(1000, 200, "%.3f" % self.ids_elapsed_time).draw(self.screen)
         UIElement(700, 265, "UCS Searched : %.0f" %
                   (self.searched_state_ucs[0])).draw(self.screen)
         UIElement(825, 305, "Steps : %.0f" %
                   (self.steps_ucs)).draw(self.screen)
+        UIElement(1000, 285, "%.3f" % self.ucs_elapsed_time).draw(self.screen)
         UIElement(645, 345, "GREEDY Searched : %.0f" %
                   (self.searched_state_greedy[0])).draw(self.screen)
         UIElement(825, 385, "Steps : %.0f" %
                   (self.steps_greedy)).draw(self.screen)
+        UIElement(1000, 365, "%.3f" % self.gd_elapsed_time).draw(self.screen)
         UIElement(716, 425, "A* Searched : %.0f" %
                   (self.searched_state_astar[0])).draw(self.screen)
         UIElement(825, 465, "Steps : %.0f" %
                   (self.steps_astar)).draw(self.screen)
+        UIElement(1000, 445, "%.3f" % self.a_elapsed_time).draw(self.screen)
         UIElement(520, 505, "Hill climbing Searched : %.0f" %
                   (self.searched_state_hill[0])).draw(self.screen)
         UIElement(825, 545, "Steps : %.0f" %
                   (self.steps_hill)).draw(self.screen)
+        UIElement(1000, 525, "%.3f" % self.h_elapsed_time).draw(self.screen)
         UIE(50, 650, self.moves).draw(self.screen)
         pygame.display.flip()
 
@@ -493,7 +527,7 @@ class Game:
         global icheck #limit the auto press of button Add image avoid error
         clicked_button_text = get_clicked_button_text()
         multi = get_clicked_button_text_multi()
-
+        self.draw()
         if clicked_button_text == "Shuffle":
             self.shuffle_time = 0
             self.start_shuffle = True
