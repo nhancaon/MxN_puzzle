@@ -131,47 +131,61 @@ class Game:
 
     #region Algorithms
     def BFS(self):
+        self.bfs_time = time.time()
         solution_path = bfs(self.initial_state, self.goal_state,self.searched_state_bfs)
+        self.bfs_elapsed_time = time.time() - self.bfs_time
         if solution_path:
             self.steps_bfs = len(solution_path)
         self.draw()
         return solution_path
 
     def DFS(self):
+        self.dfs_time = time.time()
         solution_path = dfs(self.initial_state, self.goal_state,self.searched_state_dfs)
+        self.dfs_elapsed_time = time.time() - self.dfs_time
         if solution_path:
             self.steps_dfs=len(solution_path)
         return solution_path
 
     def IDS(self):
+        self.ids_time = time.time()
         solution_path = ids(
             self.initial_state, self.goal_state,self.searched_state_ids)
+        self.ids_elapsed_time = time.time() - self.ids_time  
         if solution_path:
             self.steps_ids=len(solution_path)
         return solution_path
 
     def UCS(self):
+        self.ucs_time = time.time()
         solution_path = ucs(self.initial_state, self.goal_state,self.searched_state_ucs)
+        self.ucs_elapsed_time = time.time() - self.ucs_time
         if solution_path:
             self.steps_ucs=len(solution_path)
         return solution_path
 
     def A_STAR(self):
+        self.a_time = time.time()
         solution_path = a_star(self.initial_state, self.goal_state,self.searched_state_astar)
+        self.a_elapsed_time = time.time() - self.a_time
         if solution_path:
             self.steps_astar=len(solution_path)
         return solution_path
 
     def GREEDY(self):
+        self.gd_time = time.time()
         solution_path = greedy(
             self.initial_state, self.goal_state,self.searched_state_greedy)
+        self.gd_elapsed_time = time.time() - self.gd_time
         if solution_path:
             self.steps_greedy=len(solution_path)
         return solution_path
     
     def HILL(self):
+        self.h_time = time.time()
         solution_path = hill_climbing(
             self.initial_state, self.goal_state,self.searched_state_hill)
+        self.h_elapsed_time = time.time() - self.h_time 
         if solution_path:
             self.steps_hill=len(solution_path)
         return solution_path
@@ -249,9 +263,7 @@ class Game:
                 self.draw()
 
         if self.start_DFS:
-            self.dfs_time = time.time()
             solution_path = self.DFS()
-            self.dfs_elapsed_time = time.time() - self.dfs_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -267,9 +279,7 @@ class Game:
                 self.start_timer = True
 
         if self.start_BFS == True:
-            self.bfs_time = time.time()
             solution_path = self.BFS()
-            self.bfs_elapsed_time = time.time() - self.bfs_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -285,9 +295,7 @@ class Game:
                 self.start_timer = True
 
         if self.start_UCS:
-            self.ucs_time = time.time()
             solution_path = self.UCS()
-            self.ucs_elapsed_time = time.time() - self.ucs_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -303,9 +311,7 @@ class Game:
                 self.start_timer = True
 
         if self.start_A_STAR:
-            self.a_time = time.time()
             solution_path = self.A_STAR()
-            self.a_elapsed_time = time.time() - self.a_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -321,9 +327,7 @@ class Game:
                 self.start_timer = True
 
         if self.start_GREEDY:       
-            self.gd_time = time.time()
             solution_path = self.GREEDY()
-            self.gd_elapsed_time = time.time() - self.gd_time
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -339,9 +343,7 @@ class Game:
                 self.start_timer = True
 
         if self.start_HILL:
-            self.h_time = time.time()
             solution_path = self.HILL()
-            self.h_elapsed_time = time.time() - self.h_time       
             if solution_path:
                 self.moves=[]
                 self.moves=copy.deepcopy(solution_path)
@@ -357,9 +359,7 @@ class Game:
                 self.start_timer = True
 
         if self.start_IDS:
-            self.ids_time = time.time()
-            solution_path = self.IDS()
-            self.ids_elapsed_time = time.time() - self.ids_time   
+            solution_path = self.IDS() 
             if solution_path:
                 self.moves=copy.deepcopy(solution_path)
                 for move in solution_path:
