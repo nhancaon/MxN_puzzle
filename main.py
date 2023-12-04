@@ -398,37 +398,37 @@ class Game:
                   (self.searched_state_bfs[0])).draw(self.screen)
         UIElement(825, 65, "Steps : %.0f" %
                   (self.steps_bfs)).draw(self.screen)
-        UIElement(1000, 45, "%.3f" % self.bfs_elapsed_time).draw(self.screen)
+        UIElement(1000, 45, "%.5f" % self.bfs_elapsed_time).draw(self.screen)
         UIElement(700, 105, "DFS Searched : %.0f" %
                   (self.searched_state_dfs[0])).draw(self.screen)
         UIElement(825, 145, "Steps : %.0f" %
                   (self.steps_dfs)).draw(self.screen)
-        UIElement(1000, 125, "%.3f" % self.dfs_elapsed_time).draw(self.screen)
+        UIElement(1000, 125, "%.5f" % self.dfs_elapsed_time).draw(self.screen)
         UIElement(700, 185, "IDS Searched : %.0f" %
                   (self.searched_state_ids[0])).draw(self.screen)
         UIElement(825, 225, "Steps : %.0f" %
                   (self.steps_ids)).draw(self.screen)
-        UIElement(1000, 200, "%.3f" % self.ids_elapsed_time).draw(self.screen)
+        UIElement(1000, 200, "%.5f" % self.ids_elapsed_time).draw(self.screen)
         UIElement(700, 265, "UCS Searched : %.0f" %
                   (self.searched_state_ucs[0])).draw(self.screen)
         UIElement(825, 305, "Steps : %.0f" %
                   (self.steps_ucs)).draw(self.screen)
-        UIElement(1000, 285, "%.3f" % self.ucs_elapsed_time).draw(self.screen)
+        UIElement(1000, 285, "%.5f" % self.ucs_elapsed_time).draw(self.screen)
         UIElement(645, 345, "GREEDY Searched : %.0f" %
                   (self.searched_state_greedy[0])).draw(self.screen)
         UIElement(825, 385, "Steps : %.0f" %
                   (self.steps_greedy)).draw(self.screen)
-        UIElement(1000, 365, "%.3f" % self.gd_elapsed_time).draw(self.screen)
+        UIElement(1000, 365, "%.5f" % self.gd_elapsed_time).draw(self.screen)
         UIElement(716, 425, "A* Searched : %.0f" %
                   (self.searched_state_astar[0])).draw(self.screen)
         UIElement(825, 465, "Steps : %.0f" %
                   (self.steps_astar)).draw(self.screen)
-        UIElement(1000, 445, "%.3f" % self.a_elapsed_time).draw(self.screen)
+        UIElement(1000, 445, "%.5f" % self.a_elapsed_time).draw(self.screen)
         UIElement(520, 505, "Hill climbing Searched : %.0f" %
                   (self.searched_state_hill[0])).draw(self.screen)
         UIElement(825, 545, "Steps : %.0f" %
                   (self.steps_hill)).draw(self.screen)
-        UIElement(1000, 525, "%.3f" % self.h_elapsed_time).draw(self.screen)
+        UIElement(1000, 525, "%.5f" % self.h_elapsed_time).draw(self.screen)
         UIE(50, 650, self.moves).draw(self.screen)
         pygame.display.flip()
 
@@ -482,7 +482,7 @@ class Game:
         self.draw()
         self.draw_tiles()
         self.all_sprites.update()
-        pygame.time.delay(150)
+        pygame.time.delay(50)
 
     def return_picture_list(self):
         # Get the current working directory
